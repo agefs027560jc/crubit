@@ -16,6 +16,19 @@ cc_library(
         ],
 )
 
+cc_library(
+    name = "lifetime_demo",
+    testonly = 1,
+    srcs = ["lifetime_demo.cc"],
+    hdrs = ["lifetime_demo.h"],
+    deps = [
+        "//lifetime_analysis:analyze",
+        "//lifetime_annotations/test:named_func_lifetimes",
+        "//lifetime_annotations/test:run_on_code",
+        "@absl//absl/container:flat_hash_map",
+        ],
+)
+
 cc_test(
     name = "builtin",
     srcs = ["builtin.cc"],
@@ -198,5 +211,15 @@ cc_test(
     deps = [
         ":lifetime_analysis_test",
         "@com_google_googletest//:gtest_main",
+    ],
+)
+
+cc_binary(
+    name = "test",
+    testonly = 1,
+    srcs = ["test.cc"],
+    deps = [
+        ":lifetime_demo",
+        #"@com_google_googletest//:gtest_main",
     ],
 )
