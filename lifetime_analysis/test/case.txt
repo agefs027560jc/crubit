@@ -1,0 +1,26 @@
+int* target0(int* a, int* b, unsigned x) {
+  int* v[2] = {a, b};
+  return v[x & 1];
+}
+
+void target1(int** array, int* p, int* q) {
+  array[0] = p;
+  array[1] = q;
+}
+
+int* target2(int* a) {
+  return a;
+}
+
+int* target3(int* a) {
+  return target2(a);
+}
+
+int* target4(int* a) {
+  return a;
+}
+
+int* target5(int* x) {
+  int y = 2;
+  return &y;
+}

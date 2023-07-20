@@ -1,5 +1,9 @@
 #include <cstdio>
+#include <algorithm>
+#include <fstream>
 #include <iostream>
+#include <iterator>
+#include <string>
 
 #include "lifetime_analysis/test/lifetime_demo.h"
 
@@ -7,64 +11,19 @@ using namespace clang;
 using namespace tidy;
 using namespace lifetimes;
 
-int main()
-{
+int main(int argc, char **argv) {
     LifetimeDemo x;
 
-    std::string test = R"(
-    #include <cstdio>
-    #include <iostream>
-    int* target(int* a, int* b, unsigned x) {
-      int* v[2] = {a, b};
-      std::cout << "test";
-      return v[x & 1];
-    }
-    )";
+    //std::string outbuf;
+    std::ifstream ins(argv[1]);
+    std::string outbuf( (std::istreambuf_iterator<char>(ins) ),
+                      (std::istreambuf_iterator<char>()    ) );
+    //std::copy_if(std::istreambuf_iterator<char>(ins),
+    //             std::istreambuf_iterator<char>(),
+    //             std::back_insert_iterator<std::string>(outbuf),
+    //             [](char c) { return !std::isspace(c); });
 
-    std::string test1 = R"(
-    void target(int** array, int* p, int* q) {
-      array[0] = p;
-      array[1] = q;
-    }
-    )";
-
-    std::string test2 = R"(
-    void DemoServiceImpl::hello(const std::string& hi, std::string* reply, rrr::DeferredReply* defer) {
-        *reply += std::string("Re: ") + hi;
-        defer->reply();
-    }
-
-    void DemoServiceImpl::sum(const rrr::i32& a, const rrr::i32& b, const rrr::i32& c, rrr::i32* result, rrr::DeferredReply* defer) {
-        *result = a + b + c;
-        defer->reply();
-    }
-    )";
-
-    std::string test3 = R"(
-      int* f(int* a) {
-        return a;
-      }
-
-      int* target(int* a) {
-        return f(a);
-      }
-    )";
-
-    std::string test4 = R"(
-      int* target(int* a) {
-        return a;
-      }
-
-      int* f(int* x) {
-        int y = 2;
-        return &y;
-      }
-    )";
-
-    std::cout << x.GetLifetimes(test) << "\t#0\n"; //correct lifetime
-    std::cout << x.GetLifetimes(test1) << "\t#1\n"; //correct lifetime
-    std::cout << x.GetLifetimes(test2) << "\t#2\n"; //missing libs
-    std::cout << x.GetLifetimes(test3) << "\t#3\n"; //correct lifetime
-    std::cout << x.GetLifetimes(test4) << "\t#4\n"; //wrong lifetime
+    std::cout << x.GetLifetimes(outbuf) << std::endl;
+    //std::cout << outbuf << std::endl;
     return 0;
 }
