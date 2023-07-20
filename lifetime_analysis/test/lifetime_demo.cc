@@ -10,7 +10,7 @@
 #include <utility>
 #include <variant>
 
-#include "lifetime_annotations/test/run_on_code.h"
+#include "lifetime_annotations/test/run_on_code_demo.h"
 
 namespace clang {
 namespace tidy {

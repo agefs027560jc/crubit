@@ -10,7 +10,7 @@
 //#include "gtest/gtest.h"
 #include "absl/container/flat_hash_map.h"
 #include "lifetime_analysis/analyze.h"
-#include "lifetime_annotations/test/named_func_lifetimes.h"
+#include "lifetime_annotations/test/named_func_lifetimes_demo.h"
 
 namespace clang {
 namespace tidy {

@@ -61,10 +61,10 @@ int main()
       }
     )";
 
-    std::cout << x.GetLifetimes(test) << "\t#0\n";
-    std::cout << x.GetLifetimes(test1) << "\t#1\n";
-    std::cout << x.GetLifetimes(test2) << "\t#2\n";
-    std::cout << x.GetLifetimes(test3) << "\t#3\n";
-    std::cout << x.GetLifetimes(test4) << "\t#4\n";
+    std::cout << x.GetLifetimes(test) << "\t#0\n"; //correct lifetime
+    std::cout << x.GetLifetimes(test1) << "\t#1\n"; //correct lifetime
+    std::cout << x.GetLifetimes(test2) << "\t#2\n"; //missing libs
+    std::cout << x.GetLifetimes(test3) << "\t#3\n"; //correct lifetime
+    std::cout << x.GetLifetimes(test4) << "\t#4\n"; //wrong lifetime
     return 0;
 }

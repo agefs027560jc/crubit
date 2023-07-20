@@ -30,3 +30,30 @@ cc_library(
         "@llvm-project//llvm:Support",
     ],
 )
+
+
+cc_library(
+    name = "named_func_lifetimes_demo",
+    #testonly = 1,
+    srcs = ["named_func_lifetimes_demo.cc"],
+    hdrs = ["named_func_lifetimes_demo.h"],
+    deps = [
+        #"@com_google_googletest//:gtest",
+        "//lifetime_annotations:lifetime_symbol_table",
+        "//lifetime_annotations:type_lifetimes",
+        "@llvm-project//llvm:Support",
+    ],
+)
+
+cc_library(
+    name = "run_on_code_demo",
+    #testonly = 1,
+    srcs = ["run_on_code_demo.cc"],
+    hdrs = ["run_on_code_demo.h"],
+    deps = [
+        "//lifetime_annotations",
+        "@llvm-project//clang:ast",
+        "@llvm-project//clang:tooling",
+        "@llvm-project//llvm:Support",
+    ],
+)
