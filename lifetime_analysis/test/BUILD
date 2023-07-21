@@ -2,6 +2,18 @@
 
 package(default_visibility = ["//visibility:public"])
 
+cc_binary(
+    name= "lifetime_demo",
+    testonly = 1,
+    srcs = ["lifetime_demo.cc"],
+    deps = [
+        "//lifetime_analysis:analyze",
+        "//lifetime_annotations/test:named_func_lifetimes",
+        "//lifetime_annotations/test:run_on_code",
+        "@absl//absl/container:flat_hash_map"
+    ],
+)
+
 cc_library(
     name = "lifetime_analysis_test",
     testonly = 1,
