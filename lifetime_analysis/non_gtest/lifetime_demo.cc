@@ -2,7 +2,7 @@
 // Exceptions. See /LICENSE for license information.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-#include "lifetime_analysis/test/lifetime_demo.h"
+#include "lifetime_analysis/non_gtest/lifetime_demo.h"
 
 #include <fstream>
 #include <ostream>
